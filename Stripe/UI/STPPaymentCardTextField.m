@@ -112,10 +112,9 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 10;
     
     STPFormTextField *zipField = [self buildTextField];
     zipField.tag = STPCardFieldTypeZIP;
-//    zipField.placeholder = @"ZIP";
-    self.zipPlaceholder = @"ZIP";
     zipField.alpha = 0;
     self.zipField = zipField;
+    self.zipPlaceholder = @"ZIP";
     
     UIView *fieldsView = [[UIView alloc] init];
     fieldsView.clipsToBounds = YES;
@@ -466,29 +465,29 @@ CGFloat const STPPaymentCardTextFieldDefaultPadding = 10;
     
 }
 
-- (void)attemptTolayoutSubviews {
-    [super layoutSubviews];
-    
-    self.brandImageView.frame = CGRectMake(10, 0, self.brandImageView.image.size.width, self.frame.size.height);
-    self.interstitialView.frame = CGRectMake(0, 0, CGRectGetMaxX(self.brandImageView.frame) + 8, self.frame.size.height);
-    
-    CGFloat numberFieldWidth = [self widthForCardNumber:self.numberField.placeholder] - 4;
-    CGFloat nonFragmentWidth = [self widthForCardNumber:[self.viewModel numberWithoutLastDigits]] - 8;
-    CGFloat numberFieldX = self.numberFieldShrunk ?
-    CGRectGetMaxX(self.interstitialView.frame) + 10 - nonFragmentWidth :
-    CGRectGetMaxX(self.interstitialView.frame);
-    self.numberField.frame = CGRectMake(numberFieldX, 0, numberFieldWidth, self.frame.size.height);
-    
-    CGFloat expWidth = [self widthForText:self.expirationField.placeholder];
-    self.expirationField.frame = CGRectMake(50, 30, expWidth, self.frame.size.height);
-
-    CGFloat cvcWidth = MAX([self widthForText:self.cvcField.placeholder], [self widthForText:@"8888"]) + 2;
-    self.cvcField.frame = CGRectMake(50, 60, cvcWidth, self.frame.size.height);
-    
-    CGFloat zipWidth = [self widthForText:@"90210"];
-    self.zipField.frame = CGRectMake(50, 90, zipWidth, self.frame.size.height);
-    
-}
+//- (void)attemptTolayoutSubviews {
+//    [super layoutSubviews];
+//    
+//    self.brandImageView.frame = CGRectMake(10, 0, self.brandImageView.image.size.width, self.frame.size.height);
+//    self.interstitialView.frame = CGRectMake(0, 0, CGRectGetMaxX(self.brandImageView.frame) + 8, self.frame.size.height);
+//    
+//    CGFloat numberFieldWidth = [self widthForCardNumber:self.numberField.placeholder] - 4;
+//    CGFloat nonFragmentWidth = [self widthForCardNumber:[self.viewModel numberWithoutLastDigits]] - 8;
+//    CGFloat numberFieldX = self.numberFieldShrunk ?
+//    CGRectGetMaxX(self.interstitialView.frame) + 10 - nonFragmentWidth :
+//    CGRectGetMaxX(self.interstitialView.frame);
+//    self.numberField.frame = CGRectMake(numberFieldX, 0, numberFieldWidth, self.frame.size.height);
+//    
+//    CGFloat expWidth = [self widthForText:self.expirationField.placeholder];
+//    self.expirationField.frame = CGRectMake(50, 30, expWidth, self.frame.size.height);
+//
+//    CGFloat cvcWidth = MAX([self widthForText:self.cvcField.placeholder], [self widthForText:@"8888"]) + 2;
+//    self.cvcField.frame = CGRectMake(50, 60, cvcWidth, self.frame.size.height);
+//    
+//    CGFloat zipWidth = [self widthForText:@"90210"];
+//    self.zipField.frame = CGRectMake(50, 90, zipWidth, self.frame.size.height);
+//    
+//}
 
 
 #pragma mark - private helper methods
