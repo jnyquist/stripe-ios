@@ -6,9 +6,7 @@
 //  Copyright (c) 2015 Stripe, Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-#import "STPCard.h"
+@import UIKit;
 
 @class STPPaymentCardTextField;
 
@@ -76,6 +74,11 @@
  *  The placeholder for the cvc field. Defaults to @"CVC".
  */
 @property(nonatomic, copy, nullable) NSString *cvcPlaceholder;
+
+/**
+ *  The placeholder for the zip field. Defaults to @"ZIP".
+ */
+@property(nonatomic, copy, nullable) NSString *zipPlaceholder;
 
 /**
  *  The border color for the field. Default is [UIColor lightGreyColor]. Can be nil (in which case no border will be drawn).
@@ -153,6 +156,11 @@
  *  The current card CVC displayed by the field. May or may not be valid, unless isValid is true, in which case it is guaranteed to be valid.
  */
 @property(nonatomic, readonly, nullable) NSString *cvc;
+
+/**
+ *  The current card billing zipcode displayed by the field. May or may not be valid
+ */
+@property(nonatomic, readonly, nullable) NSString *addressZip;
 
 /**
  *  Convenience method to create a STPCard from the currently entered information. Will return nil if not valid.

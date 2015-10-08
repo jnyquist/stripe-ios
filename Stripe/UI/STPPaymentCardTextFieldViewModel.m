@@ -73,6 +73,12 @@
     _cvc = [[STPCardValidator sanitizedNumericStringForString:cvc] stp_safeSubstringToIndex:maxLength];
 }
 
+- (void)setAddressZip:(NSString *)addressZip {
+    
+    NSInteger maxLength = [STPCardValidator maxZIPLengthForUSA];
+    _addressZip = [[STPCardValidator sanitizedNumericStringForString:addressZip] stp_safeSubstringToIndex:maxLength];
+}
+
 - (STPCardBrand)brand {
     return [STPCardValidator brandForNumber:self.cardNumber];
 }
@@ -96,6 +102,8 @@
         }
         case STPCardFieldTypeCVC:
             return [STPCardValidator validationStateForCVC:self.cvc cardBrand:self.brand];
+        case STPCardFieldTypeZIP:
+            return [STPCardValidator validationStateForZIP:self.addressZip];
     }
 }
 
@@ -147,7 +155,8 @@
 - (BOOL)isValid {
     return ([self validationStateForField:STPCardFieldTypeNumber] == STPCardValidationStateValid &&
             [self validationStateForField:STPCardFieldTypeExpiration] == STPCardValidationStateValid &&
-            [self validationStateForField:STPCardFieldTypeCVC] == STPCardValidationStateValid);
+            [self validationStateForField:STPCardFieldTypeCVC] == STPCardValidationStateValid &&
+            [self validationStateForField:STPCardFieldTypeZIP] == STPCardValidationStateValid);
 }
 
 - (NSString *)defaultPlaceholder {

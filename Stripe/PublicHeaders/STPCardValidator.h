@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Stripe, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "STPCardBrand.h"
 #import "STPCardValidationState.h"
@@ -88,6 +88,12 @@
  *  @return Whether the CVC represents a valid CVC for that card brand. For example, would return STPCardValidationStateValid for @"123" and STPCardBrandVisa, STPCardValidationStateValid for @"1234" and STPCardBrandAmericanExpress, STPCardValidationStateIncomplete for @"123" and STPCardBrandAmericanExpress, and STPCardValidationStateInvalid for @"12345" and any brand.
  */
 + (STPCardValidationState)validationStateForCVC:(nonnull NSString *)cvc cardBrand:(STPCardBrand)brand;
+
+/**
+ *  The max zip code length for 'murica, and a validator
+ */
++ (NSUInteger)maxZIPLengthForUSA;
++ (STPCardValidationState)validationStateForZIP:(nonnull NSString *)addressZip;
 
 // Exposed for testing only.
 + (STPCardValidationState)validationStateForExpirationYear:(nonnull NSString *)expirationYear inMonth:(nonnull NSString *)expirationMonth inCurrentYear:(NSInteger)currentYear currentMonth:(NSInteger)currentMonth;

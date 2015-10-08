@@ -107,6 +107,25 @@
     }
 }
 
++ (STPCardValidationState)validationStateForZIP:(NSString *)addressZip  { //TODO: accept country as input somehow?
+    
+    if (![self stringIsNumeric:addressZip]) {
+        return STPCardValidationStateInvalid;
+    }
+    
+    NSString *sanitizedZip = [self sanitizedNumericStringForString:addressZip];
+    
+    NSUInteger length = [self maxZIPLengthForUSA];
+    if (sanitizedZip.length > length) {
+        return STPCardValidationStateInvalid;
+    } else if (sanitizedZip.length == length) {
+        return STPCardValidationStateValid;
+    } else {
+        return STPCardValidationStateIncomplete;
+    }
+}
+
+
 + (STPCardValidationState)validationStateForNumber:(nonnull NSString *)cardNumber
                                validatingCardBrand:(BOOL)validatingCardBrand {
     
@@ -145,6 +164,10 @@
         default:
             return 3;
     }
+}
+
++ (NSUInteger)maxZIPLengthForUSA {
+    return 5;
 }
 
 + (STPCardBrand)brandForNumber:(NSString *)cardNumber {
